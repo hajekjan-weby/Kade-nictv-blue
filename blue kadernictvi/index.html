@@ -72,7 +72,6 @@
         }
         
         .decor-right { top: 10%; right: -150px; }
-        /* Odstraněna decor-left, protože ceník má nyní vlastní pozadí */
         .decor-center { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px; height: 700px; opacity: 0.6; }
 
         /* --- Navigace --- */
@@ -235,6 +234,7 @@
             border: 2px solid var(--primary);
             text-transform: uppercase;
             letter-spacing: 1px;
+            cursor: pointer;
         }
 
         .btn:hover {
@@ -343,7 +343,7 @@
             color: var(--color-secondary);
         }
 
-        /* --- O nás --- */
+        /* --- O nás (Nyní O Mně) --- */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -357,19 +357,16 @@
             color: var(--primary);
         }
 
-        /* NOVÉ: Obal pro text se svítícím rámečkem */
         .about-text-box {
             border: 2px solid var(--primary);
             padding: 2rem;
             border-radius: 15px;
-            /* Vnější a vnitřní záře */
             box-shadow: 0 0 15px rgba(0, 194, 255, 0.3), inset 0 0 10px rgba(0, 194, 255, 0.1);
-            background: rgba(0, 194, 255, 0.03); /* Velmi jemné podbarvení */
+            background: rgba(0, 194, 255, 0.03); 
         }
 
         .about-img {
             position: relative;
-            /* UPRAVENO: Zvětšení obrázku z 65% na 75% */
             max-width: 75%;
             margin: 0 auto;
         }
@@ -394,10 +391,9 @@
             display: block;
         }
 
-        /* --- Ceník (Upraveno pozadí) --- */
+        /* --- Ceník --- */
         #cenik {
             background-color: var(--bg-light);
-            /* NOVÉ: Jemná mřížka na pozadí specificky pro ceník */
             background-image:
                 linear-gradient(to right, rgba(0, 194, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(0, 194, 255, 0.05) 1px, transparent 1px);
@@ -464,7 +460,7 @@
              text-shadow: 0 0 5px rgba(0, 194, 255, 0.3);
         }
 
-        /* --- Galerie (Grid Layout) --- */
+        /* --- Galerie --- */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -565,7 +561,7 @@
         /* --- Recenze --- */
         .reviews-section {
             background: var(--bg-light);
-            position: relative; /* Pro absolutní šipky */
+            position: relative;
         }
 
         .reviews-wrapper-container {
@@ -632,7 +628,7 @@
             box-shadow: 0 0 10px var(--primary);
         }
 
-        /* --- NEONOVÉ ŠIPKY PRO RECENZE (Mimo box) --- */
+        /* --- NEONOVÉ ŠIPKY --- */
         .custom-swiper-button-next, 
         .custom-swiper-button-prev {
             position: absolute;
@@ -640,10 +636,9 @@
             transform: translateY(-50%);
             z-index: 10;
             color: var(--primary);
-            font-size: 3rem; /* Zvětšeno */
+            font-size: 3rem;
             cursor: pointer;
             transition: 0.3s;
-            /* Výrazný neonový efekt */
             filter: drop-shadow(0 0 5px var(--primary)) drop-shadow(0 0 10px var(--primary));
         }
 
@@ -662,7 +657,7 @@
         }
         
 
-        /* --- Kontakt Side-by-Side --- */
+        /* --- Kontakt Side-by-Side bez formuláře --- */
         .contact-layout-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -673,7 +668,8 @@
         .contact-left-col {
             display: flex;
             flex-direction: column;
-            gap: 3rem;
+            gap: 2rem;
+            justify-content: center;
         }
 
         .contact-info-box {
@@ -683,24 +679,33 @@
             border-left: 5px solid var(--primary);
             border: 1px solid rgba(255,255,255,0.05);
             border-left-width: 5px;
+            height: 100%; /* Sjednocení výšky s mapou */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
-        .contact-info-box h3,
-        .contact-form-box h3 {
+        .contact-info-box h3 {
              margin-bottom: 2.5rem;
              color: var(--primary);
              text-transform: uppercase;
              letter-spacing: 1px;
         }
-        .contact-form-box h3 { text-align: center; }
 
+        /* Mapa nyní na pravé straně */
+        .contact-right-col {
+            height: 100%;
+            min-height: 500px;
+        }
 
         .contact-map-box {
             width: 100%;
-            height: 350px;
+            height: 100%;
+            min-height: 500px; /* Aby byla mapa dostatečně vysoká */
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 0 20px rgba(0, 194, 255, 0.1);
         }
 
         .contact-map-box iframe {
@@ -749,63 +754,32 @@
             font-size: 1.1rem;
         }
 
-
-        /* Right Side: Form */
-        .contact-form-box {
-            background: var(--bg-card);
-            /* UPRAVENO: Ještě menší padding top/bottom (bylo 1.5rem) */
-            padding: 0.1rem 3rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            height: 80%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .form-group { margin-bottom: 1rem; }
-
-        .form-control {
+        /* --- Nové tlačítko pro rezervaci v kontaktu --- */
+        .contact-cta-btn {
+            display: block;
             width: 100%;
+            text-align: center;
+            margin-top: 2rem;
             padding: 18px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: 0.3s;
-            background: var(--bg-body);
-            color: var(--text-main);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: var(--bg-card);
-            box-shadow: 0 0 10px rgba(0, 194, 255, 0.2);
-        }
-
-        textarea.form-control { height: 150px; resize: none; }
-
-        .btn-submit {
-            width: 100%;
             background: var(--primary);
             color: var(--bg-body);
-            border: none;
-            padding: 18px;
-            border-radius: 10px;
             font-weight: 800;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: 0.3s;
             box-shadow: 0 0 15px rgba(0, 194, 255, 0.3);
+            border: none;
         }
 
-        .btn-submit:hover { 
+        .contact-cta-btn:hover {
             background: var(--primary-dark);
             box-shadow: 0 0 25px rgba(0, 194, 255, 0.5);
+            transform: translateY(-3px);
+            color: #fff;
         }
+
 
         footer {
             background: #020202;
@@ -823,11 +797,11 @@
             .pricing-grid { grid-template-columns: 1fr; }
             section { padding: 5rem 0; }
             
-            /* Skrytí velkých šipek u recenzí na mobilu/tabletu */
             .reviews-wrapper-container .custom-swiper-button-next,
             .reviews-wrapper-container .custom-swiper-button-prev {
                 display: none;
             }
+            .contact-map-box { min-height: 350px; }
         }
 
         @media (max-width: 768px) {
@@ -857,9 +831,54 @@
             .shape-1, .shape-2 { display: none; }
             
             .review-text { font-size: 1rem; }
-            .contact-form-box { padding: 2rem 1.5rem; }
             
-            .about-text-box { padding: 1.5rem; } /* Menší padding boxu na mobilu */
+            .about-text-box { padding: 1.5rem; } 
+            
+            .contact-info-box { padding: 2rem; }
+        }
+
+        /* --- SOCIÁLNÍ SÍTĚ --- */
+        .contact-socials {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1); 
+        }
+        
+        .contact-socials h4 {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 194, 255, 0.05); 
+            border: 1px solid rgba(0, 194, 255, 0.3); 
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .social-btn:hover {
+            background: var(--primary);
+            color: var(--bg-body);
+            box-shadow: 0 0 20px rgba(0, 194, 255, 0.6);
+            transform: translateY(-5px) rotate(360deg); 
+            border-color: var(--primary);
         }
     </style>
 </head>
@@ -874,11 +893,11 @@
             <ul class="nav-links">
                 <li><a href="#domu">Domů</a></li>
                 <li><a href="#sluzby">Služby</a></li>
-                <li><a href="#o-nas">O nás</a></li>
+                <li><a href="#o-nas">O mně</a></li>
                 <li><a href="#cenik">Ceník</a></li>
                 <li><a href="#galerie">Galerie</a></li>
                 <li><a href="#recenze">Recenze</a></li>
-                <li><a href="#nase-prace">Naše práce</a></li>
+                <li><a href="#nase-prace">Moje práce</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
             </ul>
         </div>
@@ -892,31 +911,31 @@
         <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1200">
             <h1>Exkluzivní péče<br>o vaše vlasy</h1>
             <p>Vstupte do světa, kde se styl setkává s relaxací. Profesionální kadeřnictví Blue v Kladně.</p>
-            <a href="#kontakt" class="btn">Rezervovat termín</a>
+            <a href="https://www.reservio.cz/b/kadernictvi-blue/booking" target="_blank" class="btn">Rezervovat termín</a>
         </div>
     </header>
 
     <section id="sluzby">
         <div class="container">
             <div class="section-title">
-                <h2>Naše Služby</h2>
+                <h2>Moje Služby</h2>
                 <div class="line"></div>
             </div>
             <div class="services-grid">
                 <div class="service-card" data-aos="fade-up" data-aos-delay="0">
                     <i class="fas fa-cut"></i>
                     <h3>Precizní Střihy</h3>
-                    <p>Dámské, pánské i dětské střihy. Sledujeme nejnovější trendy a poradíme, co vám sluší.</p>
+                    <p>Dámské, pánské i dětské střihy. Sleduji nejnovější trendy a poradím vám, co vám bude nejvíce slušet.</p>
                 </div>
                 <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                     <i class="fas fa-paint-brush"></i>
                     <h3>Barvení & Balayage</h3>
-                    <p>Šetrné barvy, zářivé melíry a moderní techniky jako balayage či ombre pro dokonalý look.</p>
+                    <p>Šetrné barvy, zářivé melíry a moderní techniky jako balayage či ombre pro váš dokonalý look.</p>
                 </div>
                 <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                     <i class="fas fa-gem"></i>
                     <h3>Hloubková Péče</h3>
-                    <p>Regenerační kúry, čištění Malibu C a péče o poškozené vlasy pro navrácení lesku.</p>
+                    <p>Intenzivní regenerační kúry a péče o poškozené vlasy s produkty Kallos pro navrácení síly a lesku.</p>
                 </div>
                 <div class="service-card" data-aos="fade-up" data-aos-delay="300">
                     <i class="fas fa-wand-magic-sparkles"></i>
@@ -932,15 +951,16 @@
         
         <div class="container">
             <div class="section-title">
-                <h2>Kdo Jsme</h2>
+                <h2>Kdo Jsem</h2>
                 <div class="line"></div>
             </div>
             <div class="about-content">
                 <div class="about-text" data-aos="fade-right">
                     <h3>Kadeřnictví Blue</h3>
                     <div class="about-text-box">
-                        <p style="margin-bottom: 1rem;">Jsme tým nadšených profesionálů, pro které je kadeřničina nejen prací, ale především vášní. V našem salonu v srdci Kladna vytváříme prostředí, kde se budete cítit jako doma.</p>
-                        <p>Klademe důraz na individuální přístup. Každý vlas je jiný a každý klient si zaslouží péči na míru. Používáme špičkovou kosmetiku a neustále se školíme v nových technikách, abychom vám mohli nabídnout to nejlepší.</p>
+                        <p style="margin-bottom: 1rem;">Kadeřničina pro mě není jen práce, ale celoživotní vášeň. Jsem absolventkou tříletého oboru na prestižním učilišti <strong>Hygie Praha</strong> a v oboru se pohybuji již úctyhodných <strong>35 let</strong>. Za tu dobu mi rukama prošly tisíce spokojených klientek.</p>
+                        <p style="margin-bottom: 1rem;">Ve svém salonu pracuji <strong>výhradně s profesionální kosmetikou značky Kallos</strong>. Tuto značku jsem si vybrala pro její spolehlivost a skvělé výsledky.</p>
+                        <p>Aby byly vaše vlasy krásné i dlouho po návštěvě salonu, nabízím také <strong>doplňkový prodej produktů Kallos</strong>. Ráda vám sestavím péči na míru přesně pro váš typ vlasů, kterou si můžete zakoupit přímo u mě a dopřát si profesionální péči i doma.</p>
                     </div>
                 </div>
                 <div class="about-img" data-aos="fade-left">
@@ -1032,11 +1052,7 @@
                             <div class="price-value">od 320 Kč</div>
                         </div>
                           <div class="price-item">
-                            <div><span class="price-name">Hloubková regenerace</span><br><small>včetně mytí a stylingu</small></div>
-                            <div class="price-value">od 860 Kč</div>
-                        </div>
-                        <div class="price-item">
-                            <div><span class="price-name">Čištění Malibu C</span><br><small>odstranění vodního kamene</small></div>
+                            <div><span class="price-name">Hloubková regenerace Kallos</span><br><small>včetně mytí a stylingu</small></div>
                             <div class="price-value">od 860 Kč</div>
                         </div>
                           <div class="price-item">
@@ -1047,6 +1063,13 @@
                 </div>
 
             </div>
+            
+            <div style="text-align: center; margin-top: 3rem;" data-aos="fade-up">
+                <a href="https://www.reservio.cz/b/kadernictvi-blue/booking" target="_blank" class="btn">
+                    Objednat se na termín
+                </a>
+            </div>
+            
         </div>
     </section>
 
@@ -1115,7 +1138,7 @@
     <section id="nase-prace">
         <div class="container">
             <div class="section-title">
-                <h2>Ukázky Naší Práce</h2>
+                <h2>Ukázky Mojí Práce</h2>
                 <div class="line"></div>
             </div>
             
@@ -1133,7 +1156,7 @@
     <section id="kontakt" style="background-color: var(--bg-light);">
         <div class="container">
             <div class="section-title">
-                <h2>Kontaktujte Nás</h2>
+                <h2>Kontaktujte Mě</h2>
                 <div class="line"></div>
             </div>
             
@@ -1141,7 +1164,8 @@
                 
                 <div class="contact-left-col" data-aos="fade-right">
                     <div class="contact-info-box">
-                        <h3>Kde nás najdete</h3>
+                        <h3>Kde mě najdete</h3>
+                        
                         <div class="contact-item">
                             <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                             <div>
@@ -1150,20 +1174,31 @@
                                 <p>272 01</p>
                             </div>
                         </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-id-card"></i></div>
+                            <div>
+                                <h4>IČO</h4>
+                                <p>07551614</p>
+                            </div>
+                        </div>
+
                         <div class="contact-item">
                             <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
                             <div>
-                                <h4>Zavolejte nám</h4>
-                                <p><a href="tel:+420728062122" style="color:inherit; font-weight:700; text-decoration:none;">+420 728 062 122</a></p>
+                                <h4>Zavolejte mi</h4>
+                                <p><a href="tel:+420728062122" style="color:inherit; font-weight:700; text-decoration:none;">+420 724 160 685</a></p>
                             </div>
                         </div>
+
                         <div class="contact-item">
                             <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
                             <div>
                                 <h4>WhatsApp</h4>
-                                <p>Jsme online</p>
+                                <p>Jsem online</p>
                             </div>
                         </div>
+
                         <div class="contact-item">
                             <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                             <div>
@@ -1171,49 +1206,41 @@
                                 <p>kadernictviblue@gmail.com</p>
                             </div>
                         </div>
+
                         <div class="contact-item">
                             <div class="contact-icon"><i class="fas fa-clock"></i></div>
                             <div>
                                 <h4>Otevírací doba</h4>
-                                <p>Po-Pá: 8:00 - 18:00</p>
-                                <p>So: Dle objednání</p>
+                                <p>Po: 12:00 - 19:00</p>
+                                <p>Út: 10:00 - 16:00</p>
+                                <p>St: 12:00 - 17:00</p>
+                                <p>Čt: 13:00 - 19:00</p>
+                                <p>Pá - Ne: Zavřeno</p>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="contact-map-box">
-                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2556.7770851173295!2d14.1234567!3d50.1234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zHolandská 2476, Kladno!5e0!3m2!1scs!2scz!4v1600000000000" allowfullscreen="" loading="lazy"></iframe>
+
+                        <a href="https://www.reservio.cz/b/kadernictvi-blue/booking" target="_blank" class="contact-cta-btn">
+                            Rezervovat termín online <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                        </a>
+
+                        <div class="contact-socials">
+                            <h4>Sledujte mě online</h4>
+                            <div class="social-buttons">
+                                <a href="https://www.facebook.com/people/Kade%C5%99nictv%C3%AD-Blue/100057114025367/" target="_blank" class="social-btn" title="Facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.instagram.com/kadernictvi_blue_/" target="_blank" class="social-btn" title="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="contact-form-box" data-aos="fade-left">
-                    <h3>Napište nám zprávu</h3>
-                    <form>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Vaše jméno" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" class="form-control" placeholder="Telefon" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="E-mail (volitelné)">
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control">
-                                <option value="" disabled selected>O jakou službu máte zájem?</option>
-                                <option>Dámský střih</option>
-                                <option>Barvení / Melír</option>
-                                <option>Pánský střih</option>
-                                <option>Jiné / Konzultace</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="Vaše zpráva nebo preferovaný termín..."></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit">Odeslat zprávu</button>
-                    </form>
+                <div class="contact-right-col" data-aos="fade-left">
+                    <div class="contact-map-box">
+                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2556.7770851173295!2d14.1234567!3d50.1234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zHolandská 2476, Kladno!5e0!3m2!1scs!2scz!4v1600000000000" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
                 </div>
 
             </div>
@@ -1222,7 +1249,7 @@
 
     <footer>
         <div class="container">
-            <p>© <span id="year"></span> Kadeřnictví Blue | Vytvořeno s péčí.</p>
+            <p>© <span id="year"></span> Kadeřnictví Blue | Vytvořil <a href="https://webykejha.cz" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: bold;">Kejha.dev</a></p>
         </div>
     </footer>
 
