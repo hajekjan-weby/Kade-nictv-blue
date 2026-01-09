@@ -1,1373 +1,1032 @@
 <!DOCTYPE html>
-
-<html lang="cs" class="scroll-smooth">
-
+<html lang="cs">
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Kadeřnictví Blue | Kladno</title>
-
-    <meta name="description" content="Kadeřnictví Blue v Kladně-Kročehlavech. Profesionální péče, barvení a střihy. Holandská 2476.">
-
-   
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@400;600;800;900&display=swap" rel="stylesheet">
-
-   
-
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-
-
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-   
-
-    <script>
-
-        tailwind.config = {
-
-            theme: {
-
-                extend: {
-
-                    colors: {
-
-                        blue: {
-
-                            50:  '#eef9fd',
-
-                            100: '#dcf2fb',
-
-                            200: '#90ecfb', // Azurová
-
-                            300: '#8db9cf', // Hlavní
-
-                            400: '#6ea0b8',
-
-                            500: '#5a8ca5',
-
-                            800: '#2c5263',
-
-                            900: '#1e3a47', // Text
-
-                        },
-
-                    },
-
-                    fontFamily: {
-
-                        heading: ['Raleway', 'sans-serif'],
-
-                        sans: ['Montserrat', 'sans-serif'],
-
-                    },
-
-                }
-
-            }
-
-        }
-
-    </script>
-
-
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
     <style>
-
-        body { font-family: 'Montserrat', sans-serif; color: #1e3a47; }
-
-        h1, h2, h3, h4, .font-heading { font-family: 'Raleway', sans-serif; }
-
-       
-
-        .fade-in-section { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-
-        .fade-in-section.is-visible { opacity: 1; transform: none; }
-
-       
-
-        .hero-bg {
-
-            background-image: linear-gradient(rgba(30, 58, 71, 0.5), rgba(44, 82, 99, 0.6)), url('https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-
-            background-size: cover;
-
-            background-position: center;
-
-            background-attachment: fixed;
-
+        :root {
+            --primary: #13718d; /* Blue Ocean */
+            --primary-dark: #0e566c;
+            --primary-light: #e6f2f5;
+            --accent: #2c3e50;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        ::-webkit-scrollbar { width: 12px; }
+        html {
+            scroll-behavior: smooth;
+        }
 
-        ::-webkit-scrollbar-track { background: #dcf2fb; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-        ::-webkit-scrollbar-thumb { background: #8db9cf; border-radius: 6px; border: 3px solid #dcf2fb; }
+        /* --- Navigace --- */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1.2rem 0;
+            transition: 0.3s;
+        }
 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            transform: rotate(-20deg);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* --- Hero Sekce --- */
+        header {
+            height: 100vh;
+            /* Pozadí přes URL necháme, pokud není v images složce, jinak upravit také */
+            background: linear-gradient(rgba(10, 11, 12, 0.7), rgba(3, 45, 58, 0.5)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
+        }
+        .shape-1 { width: 300px; height: 300px; top: -50px; left: -100px; animation-delay: 0s; }
+        .shape-2 { width: 150px; height: 150px; bottom: 100px; right: 10%; animation-delay: 1s; }
+        .shape-3 { width: 80px; height: 80px; top: 20%; right: 20%; animation-delay: 2s; background: rgba(19, 113, 141, 0.4); }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 16px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(19, 113, 141, 0.4);
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--white);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* --- Sekce --- */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .section-title .line {
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* --- Služby --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--primary);
+            z-index: -1;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            color: var(--white);
+            box-shadow: 0 20px 50px rgba(19, 113, 141, 0.3);
+        }
+
+        .service-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .service-card i {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            transition: 0.4s;
+            display: inline-block;
+        }
+
+        .service-card:hover i {
+            color: var(--white);
+            transform: rotateY(180deg) scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- O nás --- */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img {
+            position: relative;
+        }
+        
+        .about-img::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--primary);
+            border-radius: 15px;
+            z-index: -1;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        /* --- Ceník --- */
+        .pricing-section {
+            background: linear-gradient(180deg, var(--primary-light) 0%, #fff 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .price-category {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border-top: 5px solid var(--primary);
+            transition: 0.3s;
+        }
+
+        .price-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .price-category h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px dashed #e1e1e1;
+            padding-bottom: 0.8rem;
+        }
+        
+        .price-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        /* --- Galerie & Naše práce (Grid) --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.15);
+        }
+
+        .gallery-item::after {
+            content: '\f00e'; 
+            font-family: "Font Awesome 6 Free"; 
+            font-weight: 900;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(19, 113, 141, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* --- Recenze --- */
+        .reviews-section {
+            background: var(--primary);
+            color: var(--white);
+            padding: 6rem 0;
+        }
+        
+        .reviews-section .section-title h2 { color: var(--white); }
+        .reviews-section .section-title .line { background: var(--white); }
+
+        .reviews-wrapper-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .swiper-slide-review {
+            background: var(--white);
+            color: var(--text-dark);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            user-select: none;
+        }
+
+        .review-quote {
+            font-size: 3rem;
+            color: var(--primary-light);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            max-width: 90%;
+        }
+
+        .review-stars {
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .review-author {
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .swiper-pagination-bullet {
+            background: var(--white);
+            opacity: 0.5;
+            width: 12px;
+            height: 12px;
+        }
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+            background: var(--white);
+        }
+
+        /* --- Kontakt Side-by-Side --- */
+        .contact-layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* Left Side: Info + Map */
+        .contact-left-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-info-box {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+        }
+
+        .contact-map-box {
+            width: 100%;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .contact-map-box iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            min-width: 50px;
+            height: 50px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 20px;
+            transition: 0.3s;
+        }
+        
+        .contact-item:hover .contact-icon {
+            background: var(--primary);
+            color: var(--white);
+            transform: rotate(360deg);
+        }
+
+        /* Right Side: Form */
+        .contact-form-box {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            height: 100%;
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: 0.3s;
+            background: #f9f9f9;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #fff;
+        }
+
+        textarea.form-control { height: 150px; resize: none; }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover { background: var(--primary-dark); }
+
+        footer {
+            background: #0b2e3b;
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsivita --- */
+        @media (max-width: 992px) {
+            .contact-layout-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 3.5rem; }
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                background: var(--white);
+                height: 0;
+                flex-direction: column;
+                width: 100%;
+                overflow: hidden;
+                transition: height 0.3s ease;
+                gap: 0;
+                text-align: center;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active { height: 420px; }
+            .nav-links li { width: 100%; }
+            .nav-links a { display: block; padding: 15px; width: 100%; }
+            .menu-toggle { display: block; }
+            
+            .about-content { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .shape-1, .shape-2 { display: none; }
+            
+            .review-text { font-size: 1rem; }
+        }
     </style>
-
 </head>
+<body>
 
-<body class="bg-blue-50 antialiased selection:bg-blue-200 selection:text-blue-900 overflow-x-hidden">
-
-
-
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-lg shadow-blue-200/20 transition-all duration-300 border-b border-blue-100" id="navbar">
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <div class="flex justify-between items-center h-24">
-
-                <div class="flex-shrink-0 flex items-center">
-
-                    <a href="#" class="font-heading text-2xl font-black tracking-wider text-blue-900 flex items-center uppercase">
-
-                        <span class="text-blue-300 mr-2 text-3xl"><i class="fa-solid fa-scissors"></i></span> Blue
-
-                    </a>
-
-                </div>
-
-               
-
-                <div class="hidden md:flex space-x-8 lg:space-x-12 items-center">
-
-                    <a href="#sluzby" class="text-blue-900 hover:text-blue-300 transition-colors uppercase text-xs tracking-[0.2em] font-bold">Služby</a>
-
-                    <a href="#onas" class="text-blue-900 hover:text-blue-300 transition-colors uppercase text-xs tracking-[0.2em] font-bold">O nás</a>
-
-                    <a href="#diagnostika" class="text-blue-900 hover:text-blue-300 transition-colors uppercase text-xs tracking-[0.2em] font-bold">Poradna</a>
-
-                    <a href="#cenik" class="text-blue-900 hover:text-blue-300 transition-colors uppercase text-xs tracking-[0.2em] font-bold">Ceník</a>
-
-                    <a href="#cenik" class="px-8 py-3 bg-gradient-to-r from-blue-300 to-blue-400 text-white rounded-full hover:from-blue-200 hover:to-blue-300 hover:text-blue-900 transition-all shadow-md uppercase text-xs tracking-[0.2em] font-bold transform hover:-translate-y-0.5">
-
-                        Objednat se
-
-                    </a>
-
-                </div>
-
-
-
-                <div class="md:hidden flex items-center">
-
-                    <button id="mobile-menu-btn" class="text-blue-900 hover:text-blue-300 focus:outline-none">
-
-                        <i class="fa-solid fa-bars text-3xl"></i>
-
-                    </button>
-
-                </div>
-
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo"><i class="fas fa-cut"></i> Blue</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
             </div>
-
+            <ul class="nav-links">
+                <li><a href="#domu">Domů</a></li>
+                <li><a href="#sluzby">Služby</a></li>
+                <li><a href="#o-nas">O nás</a></li>
+                <li><a href="#cenik">Ceník</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#recenze">Recenze</a></li>
+                <li><a href="#nase-prace">Naše práce</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
         </div>
-
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-blue-100 absolute w-full shadow-xl">
-
-            <div class="px-6 pt-4 pb-8 space-y-4 text-center">
-
-                <a href="#sluzby" class="block py-3 text-blue-900 font-bold">Služby</a>
-
-                <a href="#onas" class="block py-3 text-blue-900 font-bold">O nás</a>
-
-                <a href="#diagnostika" class="block py-3 text-blue-900 font-bold">Poradna</a>
-
-                <a href="#cenik" class="block py-3 text-blue-900 font-bold">Ceník</a>
-
-                <a href="#cenik" class="block py-4 text-white bg-blue-300 rounded-full mt-6 font-bold">Rezervace</a>
-
-            </div>
-
-        </div>
-
     </nav>
 
+    <header id="domu">
+        <div class="hero-shape shape-1"></div>
+        <div class="hero-shape shape-2"></div>
+        <div class="hero-shape shape-3"></div>
 
-
-    <header class="relative h-[90vh] flex items-center justify-center hero-bg text-center px-4 pt-20">
-
-        <div class="relative z-10 max-w-4xl mx-auto fade-in-section">
-
-            <div class="inline-block border-2 border-blue-200 px-6 py-2 mb-8 rounded-full bg-blue-900/30 backdrop-blur-sm">
-
-                <p class="text-blue-200 text-xs md:text-sm uppercase tracking-[0.3em] font-bold">Kladno • Kročehlavy</p>
-
-            </div>
-
-            <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl text-white font-extrabold mb-8 leading-tight drop-shadow-2xl">
-
-                Kadeřnictví <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Blue</span>
-
-            </h1>
-
-            <p class="text-blue-50 text-lg md:text-xl font-medium mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
-
-                Ponořte se do světa péče. Moderní střihy, zdravé vlasy a relaxace v příjemném prostředí na Holandské ulici.
-
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-6 justify-center">
-
-                <a href="#cenik" class="px-10 py-5 bg-blue-200 text-blue-900 rounded-full hover:bg-white transition-all shadow-xl shadow-blue-900/50 text-sm tracking-[0.2em] uppercase font-bold">
-
-                    Rezervovat termín
-
-                </a>
-
-            </div>
-
+        <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1200">
+            <h1>Exkluzivní péče<br>o vaše vlasy</h1>
+            <p>Vstupte do světa, kde se styl setkává s relaxací. Profesionální kadeřnictví Blue v Kladně.</p>
+            <a href="#kontakt" class="btn">Rezervovat termín</a>
         </div>
-
-       
-
-        <div class="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce text-blue-200 z-20">
-
-             <a href="#sluzby" class="flex flex-col items-center hover:text-white transition-colors p-2 cursor-pointer">
-
-                <span class="text-xs uppercase tracking-widest mb-2">Naše služby</span>
-
-                <i class="fa-solid fa-chevron-down text-2xl"></i>
-
-             </a>
-
-        </div>
-
     </header>
 
-
-
-    <section id="sluzby" class="py-24 bg-white relative overflow-hidden">
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-            <div class="text-center mb-16 fade-in-section">
-
-                <span class="text-blue-300 text-xs font-bold uppercase tracking-[0.3em]">Co nabízíme</span>
-
-                <h2 class="font-heading text-4xl md:text-5xl mt-2 text-blue-900 font-black">Komplexní péče o vlasy</h2>
-
+    <section id="sluzby">
+        <div class="container">
+            <div class="section-title">
+                <h2>Naše Služby</h2>
+                <div class="line"></div>
             </div>
-
-
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-20">
-
-                <div class="bg-blue-50 p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 fade-in-section flex flex-col items-center text-center h-full border-t-4 border-blue-900">
-
-                    <div class="w-20 h-20 bg-blue-200 rounded-full flex items-center justify-center mb-6 text-blue-900 shadow-md">
-
-                        <i class="fa-solid fa-scissors text-3xl"></i>
-
-                    </div>
-
-                    <h3 class="font-heading text-2xl mb-4 text-blue-900 font-bold">Střih & Styling</h3>
-
-                    <p class="text-blue-900/70 font-medium leading-relaxed">
-
-                        Precizní dámské i pánské střihy. Poradíme s tvarem, který vám sedne a snadno se upravuje. Foukaná a styling pro každou příležitost.
-
-                    </p>
-
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                    <i class="fas fa-cut"></i>
+                    <h3>Precizní Střihy</h3>
+                    <p>Dámské, pánské i dětské střihy. Sledujeme nejnovější trendy a poradíme, co vám sluší.</p>
                 </div>
-
-
-
-                <div class="bg-blue-50 p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 fade-in-section flex flex-col items-center text-center h-full border-t-4 border-blue-300 transform md:-translate-y-4 relative z-10">
-
-                    <div class="w-20 h-20 bg-blue-300 rounded-full flex items-center justify-center mb-6 text-white shadow-md">
-
-                        <i class="fa-solid fa-wand-magic-sparkles text-3xl"></i>
-
-                    </div>
-
-                    <h3 class="font-heading text-2xl mb-4 text-blue-900 font-bold">Barvení & Proměny</h3>
-
-                    <p class="text-blue-900/70 font-medium leading-relaxed">
-
-                        Máte "zrzavé přání" nebo chcete zesvětlit? Jsme specialisté na barvy, melíry a techniky jako Balayage, které vlasy rozzáří.
-
-                    </p>
-
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Barvení & Balayage</h3>
+                    <p>Šetrné barvy, zářivé melíry a moderní techniky jako balayage či ombre pro dokonalý look.</p>
                 </div>
-
-
-
-                <div class="bg-blue-50 p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 fade-in-section flex flex-col items-center text-center h-full border-t-4 border-blue-900">
-
-                    <div class="w-20 h-20 bg-blue-900 rounded-full flex items-center justify-center mb-6 text-white shadow-md">
-
-                        <i class="fa-solid fa-spa text-3xl"></i>
-
-                    </div>
-
-                    <h3 class="font-heading text-2xl mb-4 text-blue-900 font-bold">Zdraví & Regenerace</h3>
-
-                    <p class="text-blue-900/70 font-medium leading-relaxed">
-
-                        Hloubková regenerace, Olaplex a čištění vlasů (Malibu C). Vracíme vlasům sílu, lesk a zbavujeme je nánosů minerálů.
-
-                    </p>
-
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-gem"></i>
+                    <h3>Hloubková Péče</h3>
+                    <p>Regenerační kúry, čištění Malibu C a péče o poškozené vlasy pro navrácení lesku.</p>
                 </div>
-
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    <h3>Styling & Účesy</h3>
+                    <p>Foukaná, společenské a svatební účesy nebo zaplétání kanekalonu.</p>
+                </div>
             </div>
-
-
-
-            <div class="hidden md:block w-full h-24 relative fade-in-section mt-1">
-
-                <svg class="absolute top-0 left-0 w-full h-full overflow-visible" preserveAspectRatio="none">
-
-                    <path d="M 16.6% 0 Q 16.6% 50% 50% 100%" fill="none" stroke="#8db9cf" stroke-width="2" />
-
-                    <path d="M 50% 0 L 50% 100%" fill="none" stroke="#8db9cf" stroke-width="2" />
-
-                    <path d="M 83.4% 0 Q 83.4% 50% 50% 100%" fill="none" stroke="#8db9cf" stroke-width="2" />
-
-                    <circle cx="50%" cy="100%" r="6" class="fill-blue-900" />
-
-                </svg>
-
-            </div>
-
-
-
-            <div class="md:hidden w-full flex flex-col items-center fade-in-section mt-1">
-
-                <div class="w-0.5 h-16 bg-blue-300"></div>
-
-                <div class="w-3 h-3 bg-blue-900 rounded-full"></div>
-
-            </div>
-
         </div>
-
     </section>
 
-
-
-    <section id="onas" class="py-24 bg-blue-50 relative overflow-hidden">
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-
-                <div class="fade-in-section relative order-2 lg:order-1">
-
-                    <div class="absolute inset-0 border-4 border-blue-200 transform -translate-x-6 translate-y-6 rounded-[2rem] z-0"></div>
-
-                    <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Interiér salonu" class="rounded-[2rem] shadow-2xl shadow-blue-200/50 w-full object-cover h-[500px] relative z-10 grayscale-[10%]">
-
-                </div>
-
-                <div class="fade-in-section lg:pl-10 order-1 lg:order-2">
-
-                    <span class="text-blue-400 text-xs font-bold uppercase tracking-[0.2em] mb-2 block">Vítejte u nás</span>
-
-                    <h2 class="font-heading text-4xl md:text-5xl text-blue-900 mt-2 mb-8 font-black">Styl a pohoda<br><span class="text-blue-300">v odstínech modré</span></h2>
-
-                    <p class="text-blue-900/80 mb-6 leading-loose text-lg font-medium">
-
-                        Kadeřnictví Blue v Kročehlavech není jen místo, kde se stříhá. Je to místo, kde se poslouchá. Zakládáme si na tom, aby každá klientka odcházela s pocitem, že jí to sluší.
-
-                    </p>
-
-                    <p class="text-blue-900/80 mb-10 leading-loose text-lg">
-
-                        U nás používáme šetrné postupy a vždy vám poradíme to nejlepší pro váš typ vlasů.
-
-                    </p>
-
-                   
-
-                    <div class="flex items-center gap-6">
-
-                        <div class="flex -space-x-4">
-
-                            <div class="w-14 h-14 rounded-full bg-blue-200 border-4 border-blue-50 flex items-center justify-center text-blue-900 font-bold text-xl shadow-md">L</div>
-
-                            <div class="w-14 h-14 rounded-full bg-blue-300 border-4 border-blue-50 flex items-center justify-center text-white font-bold text-xl shadow-md">K</div>
-
-                            <div class="w-14 h-14 rounded-full bg-blue-900 border-4 border-blue-50 flex items-center justify-center text-white font-bold text-sm shadow-md">+15</div>
-
-                        </div>
-
-                        <div>
-
-                            <div class="flex text-blue-300 text-sm mb-1">
-
-                                <i class="fa-solid fa-star"></i>
-
-                                <i class="fa-solid fa-star"></i>
-
-                                <i class="fa-solid fa-star"></i>
-
-                                <i class="fa-solid fa-star"></i>
-
-                                <i class="fa-solid fa-star"></i>
-
-                            </div>
-
-                            <p class="font-bold text-blue-900 text-lg leading-none">95% Doporučuje</p>
-
-                            <p class="text-xs text-blue-400 font-bold uppercase tracking-wider mt-1">800 ověřených recenzí</p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
+    <section id="o-nas" style="background-color: var(--primary-light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kdo Jsme</h2>
+                <div class="line"></div>
             </div>
-
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
+                    <h3 style="color:var(--primary); font-size:1.8rem; margin-bottom:1rem;">Kadeřnictví Blue</h3>
+                    <p style="margin-bottom: 1rem;">Jsme tým nadšených profesionálů, pro které je kadeřničina nejen prací, ale především vášní. V našem salonu v srdci Kladna vytváříme prostředí, kde se budete cítit jako doma.</p>
+                    <p>Klademe důraz na individuální přístup. Každý vlas je jiný a každý klient si zaslouží péči na míru. Používáme špičkovou kosmetiku a neustále se školíme v nových technikách, abychom vám mohli nabídnout to nejlepší.</p>
+                </div>
+                <div class="about-img" data-aos="fade-left">
+                    <img src="images/foto (1).PNG" alt="Naše kadeřnice" onerror="this.src='https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                </div>
+            </div>
         </div>
-
     </section>
 
-
-
-    <section id="diagnostika" class="py-24 bg-gradient-to-br from-blue-100 via-blue-50 to-white">
-
-        <div class="max-w-4xl mx-auto px-4 text-center fade-in-section">
-
-            <span class="text-blue-400 text-xs font-bold uppercase tracking-[0.3em] mb-4 block">Interaktivní Poradna</span>
-
-            <h2 class="font-heading text-4xl md:text-5xl mb-6 text-blue-900 font-black">Diagnostika vlasů na míru</h2>
-
-            <p class="text-blue-800 mb-12">Odpovězte na dvě otázky a získejte okamžité doporučení pro vaše vlasy.</p>
-
-           
-
-            <div class="bg-white p-8 md:p-12 rounded-[2rem] text-left shadow-2xl border border-blue-200"
-
-                 x-data="{
-
-                    hairType: '',
-
-                    goal: '',
-
-                    resultTitle: '',
-
-                    resultText: '',
-
-                    calculateResult() {
-
-                        if (!this.hairType || !this.goal) return;
-
-                       
-
-                        if (this.hairType === 'poskozene' && this.goal === 'uzdravit') {
-
-                            this.resultTitle = 'Hloubková rekonstrukce';
-
-                            this.resultText = 'Vaše vlasy volají o pomoc. Doporučujeme intenzivní hloubkovou regeneraci, která obnoví vazby uvnitř vlasu. Vyhněte se prozatím velkému zesvětlování.';
-
-                        } else if (this.hairType === 'jemne' && this.goal === 'objem') {
-
-                            this.resultTitle = 'Střih pro objem & Styling';
-
-                            this.resultText = 'Pro jemné vlasy je klíčový tupý střih, který opticky zahustí konečky. Doporučujeme stylingové produkty pro objem od kořínků, které vlasy nezatíží.';
-
-                        } else if (this.goal === 'barva') {
-
-                            this.resultTitle = 'Šetrné barvení';
-
-                            this.resultText = 'Chcete změnu? Používáme barvy, které o vlasy pečují během barvení. Pro přirozený efekt doporučujeme techniku Balayage.';
-
-                        } else if (this.goal === 'cisteni') {
-
-                            this.resultTitle = 'Detox vlasů';
-
-                            this.resultText = 'Pro odstranění nánosů silikonů a vodního kamene doporučujeme naše profesionální čištění vlasů. Vlasy budou lehčí a lesklejší.';
-
-                        } else if (this.hairType === 'kudrnate') {
-
-                            this.resultTitle = 'Hydratace a definice vln';
-
-                            this.resultText = 'Kudrnaté vlasy jsou přirozeně sušší. Potřebují speciální hydratační střih a produkty, které podpoří pružnost vln bez krepatění.';
-
-                        } else {
-
-                            this.resultTitle = 'Individuální konzultace';
-
-                            this.resultText = 'Každý vlas je jiný. Objednejte se k nám na konzultaci zdarma, podíváme se na kvalitu vlasů a vymyslíme plán přesně pro vás.';
-
-                        }
-
-                    }
-
-                 }"
-
-                 x-effect="calculateResult()">
-
-               
-
-                <form class="space-y-8">
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-                        <div>
-
-                            <label class="block text-sm uppercase tracking-widest text-blue-400 mb-3 font-bold">1. Typ vašich vlasů</label>
-
-                            <div class="relative">
-
-                                <select x-model="hairType" class="w-full bg-blue-50 border-2 border-blue-100 rounded-xl px-5 py-4 focus:outline-none focus:border-blue-300 text-blue-900 font-bold appearance-none cursor-pointer">
-
-                                    <option value="" disabled selected>Vyberte typ...</option>
-
-                                    <option value="jemne">Jemné a plihnoucí</option>
-
-                                    <option value="poskozene">Suché / zničené / lámavé</option>
-
-                                    <option value="kudrnate">Kudrnaté / vlnité</option>
-
-                                    <option value="normalni">Normální / bezproblémové</option>
-
-                                    <option value="kratke">Krátké</option>
-
-                                </select>
-
-                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-blue-400">
-
-                                    <i class="fa-solid fa-chevron-down"></i>
-
-                                </div>
-
-                            </div>
-
+    <section id="cenik" class="pricing-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ceník Služeb</h2>
+                <div class="line"></div>
+            </div>
+            
+            <div class="pricing-grid">
+                
+                <div class="pricing-col-left">
+                    <div class="price-category" data-aos="fade-up">
+                        <h3><i class="fas fa-venus"></i> Dámské střihy</h3>
+                        <div class="price-item">
+                            <div><span class="price-name">Krátké vlasy + foukaná</span><br><small>mytí, střih, styling</small></div>
+                            <div class="price-value">700 Kč</div>
                         </div>
-
-
-
-                        <div>
-
-                            <label class="block text-sm uppercase tracking-widest text-blue-400 mb-3 font-bold">2. Váš hlavní cíl</label>
-
-                            <div class="relative">
-
-                                <select x-model="goal" class="w-full bg-blue-50 border-2 border-blue-100 rounded-xl px-5 py-4 focus:outline-none focus:border-blue-300 text-blue-900 font-bold appearance-none cursor-pointer">
-
-                                    <option value="" disabled selected>Čeho chcete dosáhnout...</option>
-
-                                    <option value="objem">Větší objem a hustota</option>
-
-                                    <option value="uzdravit">Uzdravit a zregenerovat</option>
-
-                                    <option value="barva">Nová barva / melír</option>
-
-                                    <option value="strih">Nový střih / změna image</option>
-
-                                    <option value="cisteni">Oživení / Odstranění nánosů</option>
-
-                                </select>
-
-                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-blue-400">
-
-                                    <i class="fa-solid fa-chevron-down"></i>
-
-                                </div>
-
-                            </div>
-
+                        <div class="price-item">
+                            <div><span class="price-name">Polodlouhé vlasy + foukaná</span><br><small>mytí, střih, styling</small></div>
+                            <div class="price-value">800 Kč</div>
                         </div>
-
+                        <div class="price-item">
+                            <div><span class="price-name">Dlouhé vlasy + foukaná</span><br><small>mytí, střih, styling</small></div>
+                            <div class="price-value">910 Kč</div>
+                        </div>
                     </div>
 
-                   
-
-                    <div x-show="hairType && goal"
-
-                         x-transition:enter="transition ease-out duration-500"
-
-                         x-transition:enter-start="opacity-0 transform -translate-y-4"
-
-                         x-transition:enter-end="opacity-100 transform translate-y-0"
-
-                         class="bg-blue-900 p-8 rounded-xl text-white mt-8 shadow-inner relative overflow-hidden">
-
-                         <div class="absolute top-0 right-0 w-32 h-32 bg-blue-200 rounded-full blur-[50px] opacity-20"></div>
-
-                         
-
-                        <h4 class="font-heading text-2xl font-bold mb-3 text-blue-200 flex items-center">
-
-                            <i class="fa-solid fa-circle-check mr-3"></i> <span x-text="resultTitle"></span>
-
-                        </h4>
-
-                        <p class="text-blue-50 leading-relaxed text-lg" x-text="resultText"></p>
-
-                       
-
-                        <div class="mt-6 pt-6 border-t border-blue-800">
-
-                            <a href="#cenik" class="inline-block text-blue-200 font-bold hover:text-white uppercase tracking-widest text-xs border-b border-blue-200 pb-1">Přejít na ceník této služby</a>
-
+                    <div class="price-category" style="margin-top: 2rem;" data-aos="fade-up">
+                        <h3><i class="fas fa-palette"></i> Barvení</h3>
+                        <div class="price-item">
+                            <div><span class="price-name">Krátké vlasy / odrosty</span><br><small>barva, mytí, střih, styling</small></div>
+                            <div class="price-value">1 730 Kč</div>
                         </div>
+                        <div class="price-item">
+                            <div><span class="price-name">Polodlouhé vlasy</span><br><small>barva, mytí, střih, styling</small></div>
+                            <div class="price-value">2 030 Kč</div>
+                        </div>
+                        <div class="price-item">
+                            <div><span class="price-name">Dlouhé vlasy</span><br><small>barva, mytí, střih, styling</small></div>
+                            <div class="price-value">2 450 Kč</div>
+                        </div>
+                    </div>
+                      <div class="price-category" style="margin-top: 2rem;" data-aos="fade-up">
+                        <h3><i class="fas fa-mars"></i> Pánské střihy</h3>
+                        <div class="price-item">
+                            <div><span class="price-name">Pánský střih</span><br><small>mytí +50 Kč</small></div>
+                            <div class="price-value">400 Kč</div>
+                        </div>
+                        <div class="price-item">
+                            <div><span class="price-name">Barber střih</span></div>
+                            <div class="price-value">700 Kč</div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="pricing-col-right">
+                    <div class="price-category" data-aos="fade-up" data-aos-delay="100">
+                        <h3><i class="fas fa-magic"></i> Melíry</h3>
+                        <div class="price-item">
+                            <div><span class="price-name">Krátké vlasy</span><br><small>melír, mytí, střih, styling</small></div>
+                            <div class="price-value">1 820 Kč</div>
+                        </div>
+                        <div class="price-item">
+                            <div><span class="price-name">Polodlouhé vlasy</span><br><small>melír, mytí, střih, styling</small></div>
+                            <div class="price-value">2 220 Kč</div>
+                        </div>
+                        <div class="price-item">
+                            <div><span class="price-name">Dlouhé vlasy</span><br><small>melír, mytí, střih, styling</small></div>
+                            <div class="price-value">2 710 Kč</div>
+                        </div>
                     </div>
 
-                </form>
+                    <div class="price-category" style="margin-top: 2rem;" data-aos="fade-up" data-aos-delay="100">
+                        <h3><i class="fas fa-wind"></i> Styling & Péče</h3>
+                        <div class="price-item">
+                            <div><span class="price-name">Společenský účes</span></div>
+                            <div class="price-value">700 Kč</div>
+                        </div>
+                        <div class="price-item">
+                            <div><span class="price-name">Foukaná (dle délky)</span></div>
+                            <div class="price-value">od 320 Kč</div>
+                        </div>
+                          <div class="price-item">
+                            <div><span class="price-name">Hloubková regenerace</span><br><small>včetně mytí a stylingu</small></div>
+                            <div class="price-value">od 860 Kč</div>
+                        </div>
+                        <div class="price-item">
+                            <div><span class="price-name">Čištění Malibu C</span><br><small>odstranění vodního kamene</small></div>
+                            <div class="price-value">od 860 Kč</div>
+                        </div>
+                          <div class="price-item">
+                            <div><span class="price-name">Trvalá (dle délky)</span></div>
+                            <div class="price-value">od 1 630 Kč</div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-
         </div>
-
     </section>
 
-
-
-    <section id="cenik" class="py-24 bg-white relative">
-
-        <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-50/50 -skew-x-12 z-0 hidden lg:block"></div>
-
-       
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-            <div class="text-center mb-16 fade-in-section">
-
-                <span class="text-blue-300 text-xs font-bold uppercase tracking-[0.3em]">Transparentní ceny</span>
-
-                <h2 class="font-heading text-4xl md:text-6xl text-blue-900 font-black mt-2">Ceník služeb</h2>
-
+    <section id="galerie">
+        <div class="container">
+            <div class="section-title">
+                <h2>Galerie Interiéru</h2>
+                <div class="line"></div>
             </div>
-
-
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-12 fade-in-section">
-
-               
-
-                <div class="bg-blue-50 p-8 rounded-3xl shadow-lg border border-blue-100">
-
-                    <h3 class="font-heading text-2xl font-bold text-blue-900 mb-8 flex items-center">
-
-                        <span class="w-10 h-10 bg-blue-200 rounded-full flex items-center justify-center text-blue-900 mr-4 text-sm"><i class="fa-solid fa-venus"></i></span>
-
-                        Dámské střihy & Foukaná
-
-                    </h3>
-
-                    <ul class="space-y-4">
-
-                        <li class="flex justify-between items-center border-b border-blue-200 pb-2">
-
-                            <div>
-
-                                <span class="text-blue-900 font-bold block">Krátké vlasy</span>
-
-                                <span class="text-xs text-blue-500">mytí, střih, styling</span>
-
-                            </div>
-
-                            <span class="font-bold text-blue-900 text-lg">700 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center border-b border-blue-200 pb-2">
-
-                            <div>
-
-                                <span class="text-blue-900 font-bold block">Polodlouhé vlasy</span>
-
-                                <span class="text-xs text-blue-500">mytí, střih, styling</span>
-
-                            </div>
-
-                            <span class="font-bold text-blue-900 text-lg">800 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center border-b border-blue-200 pb-2">
-
-                            <div>
-
-                                <span class="text-blue-900 font-bold block">Dlouhé vlasy</span>
-
-                                <span class="text-xs text-blue-500">mytí, střih, styling</span>
-
-                            </div>
-
-                            <span class="font-bold text-blue-900 text-lg">910 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center border-b border-blue-200 pb-2">
-
-                            <div>
-
-                                <span class="text-blue-900 font-bold block">Foukaná (krátké)</span>
-
-                                <span class="text-xs text-blue-500">mytí, styling</span>
-
-                            </div>
-
-                            <span class="font-bold text-blue-900 text-lg">320 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center border-b border-blue-200 pb-2">
-
-                            <div>
-
-                                <span class="text-blue-900 font-bold block">Foukaná (polodlouhé)</span>
-
-                                <span class="text-xs text-blue-500">mytí, styling</span>
-
-                            </div>
-
-                            <span class="font-bold text-blue-900 text-lg">380 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center border-b border-blue-200 pb-2">
-
-                            <div>
-
-                                <span class="text-blue-900 font-bold block">Foukaná (dlouhé)</span>
-
-                                <span class="text-xs text-blue-500">mytí, styling</span>
-
-                            </div>
-
-                            <span class="font-bold text-blue-900 text-lg">440 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center pt-2">
-
-                            <div>
-
-                                <span class="text-blue-900 font-bold block">Společenský účes</span>
-
-                                <span class="text-xs text-blue-500">mytí, styling</span>
-
-                            </div>
-
-                            <span class="font-bold text-blue-900 text-lg">700 Kč</span>
-
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-
-                <div class="bg-white p-8 rounded-3xl shadow-lg border-2 border-blue-50">
-
-                    <h3 class="font-heading text-2xl font-bold text-blue-900 mb-8 flex items-center">
-
-                        <span class="w-10 h-10 bg-blue-300 rounded-full flex items-center justify-center text-white mr-4 text-sm"><i class="fa-solid fa-brush"></i></span>
-
-                        Barvení, Melír & Trvalá
-
-                    </h3>
-
-                    <p class="text-xs text-blue-500 mb-4 bg-blue-50 p-2 rounded italic">Všechny služby obsahují: barvu/trvalou, mytí, střih a styling.</p>
-
-                    <ul class="space-y-4">
-
-                        <li class="flex justify-between items-center border-b border-gray-100 pb-2">
-
-                            <span class="text-blue-800 font-medium">Barva - krátké / odrosty</span>
-
-                            <span class="font-bold text-blue-900">1 730 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center border-b border-gray-100 pb-2">
-
-                            <span class="text-blue-800 font-medium">Barva - polodlouhé</span>
-
-                            <span class="font-bold text-blue-900">2 030 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center border-b border-gray-100 pb-2">
-
-                            <span class="text-blue-800 font-medium">Barva - dlouhé</span>
-
-                            <span class="font-bold text-blue-900">2 450 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center border-b border-gray-100 pb-2 mt-6">
-
-                            <span class="text-blue-800 font-medium">Melír - krátké</span>
-
-                            <span class="font-bold text-blue-900">1 820 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center border-b border-gray-100 pb-2">
-
-                            <span class="text-blue-800 font-medium">Melír - polodlouhé</span>
-
-                            <span class="font-bold text-blue-900">2 220 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center border-b border-gray-100 pb-2">
-
-                            <span class="text-blue-800 font-medium">Melír - dlouhé</span>
-
-                            <span class="font-bold text-blue-900">2 710 Kč</span>
-
-                        </li>
-
-                         <li class="flex justify-between items-center border-b border-gray-100 pb-2 mt-6">
-
-                            <span class="text-blue-800 font-medium">Trvalá - krátké</span>
-
-                            <span class="font-bold text-blue-900">1 630 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center border-b border-gray-100 pb-2">
-
-                            <span class="text-blue-800 font-medium">Trvalá - polodlouhé</span>
-
-                            <span class="font-bold text-blue-900">2 040 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center pt-2">
-
-                            <span class="text-blue-800 font-medium">Trvalá - dlouhé</span>
-
-                            <span class="font-bold text-blue-900">2 460 Kč</span>
-
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-
-                <div class="bg-white p-8 rounded-3xl shadow-lg border-2 border-blue-50">
-
-                    <h3 class="font-heading text-2xl font-bold text-blue-900 mb-8 flex items-center">
-
-                        <span class="w-10 h-10 bg-blue-900 rounded-full flex items-center justify-center text-white mr-4 text-sm"><i class="fa-solid fa-mars"></i></span>
-
-                        Pánské & Speciality
-
-                    </h3>
-
-                    <ul class="space-y-4">
-
-                        <li class="flex justify-between items-center border-b border-gray-100 pb-2">
-
-                            <div>
-
-                                <span class="text-blue-800 font-bold block">Pánský střih</span>
-
-                                <span class="text-xs text-blue-500">v případě mytí +50 Kč</span>
-
-                            </div>
-
-                            <span class="font-bold text-blue-900 text-lg">400 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center border-b border-gray-100 pb-2">
-
-                            <span class="text-blue-800 font-medium">Barber střih</span>
-
-                            <span class="font-bold text-blue-900 text-lg">700 Kč</span>
-
-                        </li>
-
-                        <li class="flex justify-between items-center pt-2">
-
-                            <div>
-
-                                <span class="text-blue-800 font-bold block">Zapletený kanekalon</span>
-
-                                <span class="text-xs text-blue-500">pletu pouze dva copy</span>
-
-                            </div>
-
-                            <span class="font-bold text-blue-900 text-lg">450 Kč</span>
-
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-
-                <div class="bg-blue-900 p-8 rounded-3xl shadow-lg text-white">
-
-                    <h3 class="font-heading text-2xl font-bold text-blue-200 mb-8 flex items-center">
-
-                        <span class="w-10 h-10 bg-blue-200 rounded-full flex items-center justify-center text-blue-900 mr-4 text-sm"><i class="fa-solid fa-spa text-lg"></i></span>
-
-                        Regenerace & Čištění vlasů
-
-                    </h3>
-
-                    <ul class="space-y-4">
-
-                        <li class="border-b border-blue-800 pb-2">
-
-                            <div class="flex justify-between items-center mb-1">
-
-                                <span class="text-blue-100 font-bold">Hloubková regenerace</span>
-
-                            </div>
-
-                            <div class="flex justify-between text-sm text-blue-300">
-
-                                <span>krátké</span> <span>860 Kč</span>
-
-                            </div>
-
-                            <div class="flex justify-between text-sm text-blue-300">
-
-                                <span>polodlouhé</span> <span>980 Kč</span>
-
-                            </div>
-
-                            <div class="flex justify-between text-sm text-blue-300">
-
-                                <span>dlouhé</span> <span>1 100 Kč</span>
-
-                            </div>
-
-                            <div class="text-xs text-blue-400 mt-1 italic">+ foukaná a styling v ceně</div>
-
-                        </li>
-
-
-
-                         <li class="pt-4">
-
-                            <div class="flex justify-between items-center mb-1">
-
-                                <span class="text-blue-100 font-bold">Čištění vlasů (Malibu C)</span>
-
-                            </div>
-
-                            <div class="text-xs text-blue-400 mb-2 italic">odstranění vodního kamene a zbytků kosmetiky</div>
-
-                            <div class="flex justify-between text-sm text-blue-300">
-
-                                <span>krátké</span> <span>860 Kč</span>
-
-                            </div>
-
-                            <div class="flex justify-between text-sm text-blue-300">
-
-                                <span>polodlouhé</span> <span>950 Kč</span>
-
-                            </div>
-
-                            <div class="flex justify-between text-sm text-blue-300">
-
-                                <span>dlouhé</span> <span>1 020 Kč</span>
-
-                            </div>
-
-                            <div class="text-xs text-blue-400 mt-1 italic">+ foukaná a styling v ceně</div>
-
-                        </li>
-
-                    </ul>
-
-                </div>
-
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="fade-up"><img src="images/foto (2).PNG" alt="Salon" onerror="this.src='https://placehold.co/400x300/13718d/ffffff?text=Interier+1'"></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="images/foto (3).PNG" alt="Salon" onerror="this.src='https://placehold.co/400x400/13718d/ffffff?text=Interier+2'"></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="images/foto (4).PNG" alt="Salon" onerror="this.src='https://placehold.co/300x500/13718d/ffffff?text=Interier+3'"></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="images/foto (5).PNG" alt="Salon" onerror="this.src='https://placehold.co/400x300/13718d/ffffff?text=Interier+4'"></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="images/foto (6).PNG" alt="Salon" onerror="this.src='https://placehold.co/400x300/13718d/ffffff?text=Interier+5'"></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="images/foto (7).PNG" alt="Salon" onerror="this.src='https://placehold.co/400x400/13718d/ffffff?text=Interier+6'"></div>
             </div>
-
-
-
-            <div class="text-center mt-12 fade-in-section">
-
-                <a href="#kontakt" class="inline-flex flex-col items-center group">
-
-                    <div class="px-12 py-5 bg-gradient-to-r from-blue-900 to-blue-800 text-white rounded-full font-bold uppercase tracking-widest shadow-xl hover:scale-105 transition-all duration-300 border-4 border-blue-100">
-
-                        Rezervovat termín
-
-                    </div>
-
-                    <span class="text-blue-300 text-sm mt-3 font-medium">Objednejte se online</span>
-
-                </a>
-
-            </div>
-
         </div>
-
     </section>
 
-
-
-    <section id="recenze" class="py-24 bg-blue-900 text-white relative overflow-hidden">
-
-        <div class="absolute top-0 right-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-
-       
-
-        <div class="max-w-4xl mx-auto px-4 text-center relative z-10 fade-in-section"
-
-             x-data="{
-
-                 activeSlide: 0,
-
-                 slides: [
-
-                     { text: 'Super střih, zdravé vlasy, velmi milá paní kadeřnice, jsem velmi spokojená. Pokaždé jiná, i když mám krátké vlasy.', author: 'Lydie', label: 'Střih' },
-
-                     { text: 'Dnes jsem byla v kadeřnictví Blue a velmi spokojená. Paní je velmi příjemná a vždy mi dobře poradí. Měla jsem zrzavé přání a super. Jsem nadšená.', author: 'Spokojená klientka', label: 'Barvení' },
-
-                     { text: 'Suprová, moc moc šikovná paní kadeřnice. Příjemné prostředí. Byla jsem tu poprvé a jsem opravdu hodně nadšená. Určitě se sem ráda vrátím.', author: 'Nová zákaznice', label: 'První návštěva' }
-
-                 ]
-
-             }">
-
-           
-
-            <i class="fa-solid fa-quote-left text-5xl text-blue-300 mb-10 opacity-50"></i>
-
-           
-
-            <div class="relative min-h-[250px] grid grid-cols-1 grid-rows-1 items-center justify-items-center">
-
-                <template x-for="(slide, index) in slides" :key="index">
-
-                    <div x-show="activeSlide === index"
-
-                         x-transition:enter="transition ease-out duration-500"
-
-                         x-transition:enter-start="opacity-0 translate-y-4"
-
-                         x-transition:enter-end="opacity-100 translate-y-0"
-
-                         x-transition:leave="transition ease-in duration-300"
-
-                         x-transition:leave-start="opacity-100 translate-y-0"
-
-                         x-transition:leave-end="opacity-0 -translate-y-4"
-
-                         class="w-full col-start-1 row-start-1">
-
-                        <p class="text-xl md:text-2xl font-medium italic leading-relaxed mb-8 md:px-10" x-text="slide.text"></p>
-
-                        <div class="flex flex-col items-center">
-
-                            <span class="font-bold text-lg tracking-widest uppercase text-blue-200" x-text="slide.author"></span>
-
-                            <span class="text-sm text-blue-100 mt-2 bg-blue-800 px-4 py-1 rounded-full border border-blue-700" x-text="slide.label"></span>
-
-                        </div>
-
+    <section id="recenze" class="reviews-section">
+        <div class="container reviews-wrapper-container">
+            <div class="section-title">
+                <h2>Co říkají klienti</h2>
+                <div class="line"></div>
+            </div>
+            
+            <div class="swiper reviewsSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide swiper-slide-review">
+                        <i class="fas fa-quote-left review-quote"></i>
+                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="review-text">"Naprostá spokojenost! Skvělý střih a velmi příjemná atmosféra. Kadeřnice mi skvěle poradila s barvou. Určitě se vrátím."</p>
+                        <p class="review-author">- Jana Nováková</p>
                     </div>
-
-                </template>
-
-            </div>
-
-
-
-            <div class="flex justify-center items-center space-x-8 mt-12">
-
-                <button @click="activeSlide = activeSlide === 0 ? slides.length - 1 : activeSlide - 1" class="text-blue-300 hover:text-white transition-colors p-2">
-
-                    <i class="fa-solid fa-chevron-left text-2xl"></i>
-
-                </button>
-
-                <div class="flex space-x-3">
-
-                    <template x-for="(slide, index) in slides" :key="index">
-
-                        <button @click="activeSlide = index"
-
-                                class="w-3 h-3 rounded-full transition-all duration-300"
-
-                                :class="activeSlide === index ? 'bg-blue-200 scale-125' : 'bg-blue-800 hover:bg-blue-700'"></button>
-
-                    </template>
-
+                    <div class="swiper-slide swiper-slide-review">
+                        <i class="fas fa-quote-left review-quote"></i>
+                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="review-text">"Konečně kadeřnictví v Kladně, kde rozumí tomu, co chci. Melír vypadá naprosto přirozeně a vlasy jsou zdravé."</p>
+                        <p class="review-author">- Petra Svobodová</p>
+                    </div>
+                    <div class="swiper-slide swiper-slide-review">
+                        <i class="fas fa-quote-left review-quote"></i>
+                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="review-text">"Chodím sem na pánský střih už rok a vždy perfektní práce. Rychlé objednání a fajn pokec."</p>
+                        <p class="review-author">- Tomáš Kučera</p>
+                    </div>
+                    <div class="swiper-slide swiper-slide-review">
+                        <i class="fas fa-quote-left review-quote"></i>
+                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="review-text">"Úžasný přístup k dětem. Syn se poprvé u stříhání nebál a odcházel s úsměvem."</p>
+                        <p class="review-author">- Lenka Malá</p>
+                    </div>
+                    <div class="swiper-slide swiper-slide-review">
+                        <i class="fas fa-quote-left review-quote"></i>
+                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="review-text">"Malibu C čištění mi zachránilo vlasy. Obrovský rozdíl hned po první návštěvě."</p>
+                        <p class="review-author">- Veronika Kratochvílová</p>
+                    </div>
                 </div>
-
-                <button @click="activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1" class="text-blue-300 hover:text-white transition-colors p-2">
-
-                    <i class="fa-solid fa-chevron-right text-2xl"></i>
-
-                </button>
-
+                <div class="swiper-pagination"></div>
             </div>
-
-           
-
-             <div class="mt-12 text-blue-200 font-bold text-sm tracking-widest uppercase border-t border-blue-800 pt-6 inline-block px-10">
-
-                <i class="fa-solid fa-star mr-2"></i> 95% Doporučuje (800 recenzí)
-
-            </div>
-
         </div>
-
     </section>
 
+    <section id="nase-prace">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ukázky Naší Práce</h2>
+                <div class="line"></div>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="0"><img src="images/foto (8).PNG" alt="Klient 1" onerror="this.src='https://placehold.co/320x450/13718d/ffffff?text=Střih+1'"></div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100"><img src="images/foto (9).PNG" alt="Klient 2" onerror="this.src='https://placehold.co/320x450/13718d/ffffff?text=Barva+2'"></div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200"><img src="images/foto (10).PNG" alt="Klient 3" onerror="this.src='https://placehold.co/320x450/13718d/ffffff?text=Melír+3'"></div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300"><img src="images/foto (11).PNG" alt="Klient 4" onerror="this.src='https://placehold.co/320x450/13718d/ffffff?text=Účes+4'"></div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400"><img src="images/foto (12).PNG" alt="Klient 5" onerror="this.src='https://placehold.co/320x450/13718d/ffffff?text=Proměna+5'"></div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="500"><img src="images/foto (13).PNG" alt="Klient 6" onerror="this.src='https://placehold.co/320x450/13718d/ffffff?text=Střih+6'"></div>
+            </div>
+        </div>
+    </section>
 
-
-    <section id="kontakt" class="py-24 bg-blue-50 relative overflow-hidden">
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-
-               
-
-                <div class="fade-in-section">
-
-                    <span class="text-blue-400 font-bold uppercase tracking-[0.3em] mb-4 block">Kontaktujte nás</span>
-
-                    <h2 class="font-heading text-4xl md:text-5xl mt-2 mb-8 text-blue-900 font-black">Kde nás najdete?</h2>
-
-                    <p class="text-blue-800 mb-10 text-lg">Jsme tu pro vás v srdci Kladna. Zavolejte, napište nebo se rovnou objednejte formulářem.</p>
-
-                   
-
-                    <div class="space-y-8 bg-white p-8 rounded-3xl shadow-xl border border-blue-100">
-
-                        <div class="flex items-start gap-5">
-
-                            <div class="bg-blue-50 p-3 rounded-xl text-blue-300">
-
-                                <i class="fa-solid fa-location-dot text-2xl"></i>
-
-                            </div>
-
+    <section id="kontakt" style="background-color: #f8fcfd;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kontaktujte Nás</h2>
+                <div class="line"></div>
+            </div>
+            
+            <div class="contact-layout-grid">
+                
+                <div class="contact-left-col" data-aos="fade-right">
+                    <div class="contact-info-box">
+                        <h3 style="margin-bottom:2rem; color:var(--primary);">Kde nás najdete</h3>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                             <div>
-
-                                <h4 class="font-heading text-xl font-bold text-blue-900">Kadeřnictví Blue</h4>
-
-                                <p class="text-gray-600">Holandská 2476<br>272 01 Kladno - Kročehlavy</p>
-
+                                <h4>Adresa</h4>
+                                <p>Holandská 2476, Kladno - Kročehlavy</p>
+                                <p>272 01</p>
                             </div>
-
                         </div>
-
-                       
-
-                        <div class="flex items-start gap-5">
-
-                            <div class="bg-blue-50 p-3 rounded-xl text-blue-300">
-
-                                <i class="fa-brands fa-whatsapp text-2xl"></i>
-
-                            </div>
-
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
                             <div>
-
-                                <h4 class="font-heading text-xl font-bold text-blue-900">Telefon / WhatsApp</h4>
-
-                                <a href="tel:+420728062122" class="text-blue-500 text-xl font-bold hover:underline block">+420 728 062 122</a>
-
-                                <p class="text-xs text-gray-400 mt-1">Objednávky po-pá 8:00 - 20:00</p>
-
+                                <h4>Zavolejte nám</h4>
+                                <p><a href="tel:+420728062122" style="color:inherit; font-weight:700; text-decoration:none;">+420 728 062 122</a></p>
                             </div>
-
                         </div>
-
-
-
-                         <div class="flex items-start gap-5">
-
-                            <div class="bg-blue-50 p-3 rounded-xl text-blue-300">
-
-                                <i class="fa-solid fa-envelope text-2xl"></i>
-
-                            </div>
-
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
                             <div>
-
-                                <h4 class="font-heading text-xl font-bold text-blue-900">E-mail</h4>
-
-                                <a href="mailto:kadernictviblue@gmail.com" class="text-gray-600 hover:text-blue-500">kadernictviblue@gmail.com</a>
-
+                                <h4>WhatsApp</h4>
+                                <p>Jsme online</p>
                             </div>
-
                         </div>
-
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4>E-mail</h4>
+                                <p>kadernictviblue@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                            <div>
+                                <h4>Otevírací doba</h4>
+                                <p>Po-Pá: 8:00 - 18:00</p>
+                                <p>So: Dle objednání</p>
+                            </div>
+                        </div>
                     </div>
-
+                    
+                    <div class="contact-map-box">
+                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2556.7770851173295!2d14.1234567!3d50.1234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zHolandská 2476, Kladno!5e0!3m2!1scs!2scz!4v1600000000000" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
                 </div>
 
-
-
-                <div class="bg-blue-900 p-8 md:p-10 rounded-[2.5rem] shadow-2xl fade-in-section text-white relative overflow-hidden">
-
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-blue-400 rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
-
-                   
-
-                    <h3 class="font-heading text-3xl font-bold mb-6">Napište nám</h3>
-
-                    <form class="space-y-5 relative z-10">
-
-                        <div>
-
-                            <label class="block text-xs font-bold uppercase tracking-widest text-blue-200 mb-2">Jméno</label>
-
-                            <input type="text" class="w-full bg-blue-800/50 border border-blue-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-300 focus:bg-blue-800 transition-colors text-white placeholder-blue-300/50" placeholder="Vaše jméno">
-
+                <div class="contact-form-box" data-aos="fade-left">
+                    <h3 style="margin-bottom:2rem; color:var(--primary); text-align: center;">Napište nám zprávu</h3>
+                    <form>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Vaše jméno" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="form-control" placeholder="Telefon" required>
+                            </div>
                         </div>
-
-                        <div>
-
-                            <label class="block text-xs font-bold uppercase tracking-widest text-blue-200 mb-2">Telefon</label>
-
-                            <input type="tel" class="w-full bg-blue-800/50 border border-blue-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-300 focus:bg-blue-800 transition-colors text-white placeholder-blue-300/50" placeholder="+420...">
-
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="E-mail (volitelné)">
                         </div>
-
-                        <div>
-
-                            <label class="block text-xs font-bold uppercase tracking-widest text-blue-200 mb-2">Zpráva</label>
-
-                            <textarea rows="4" class="w-full bg-blue-800/50 border border-blue-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-300 focus:bg-blue-800 transition-colors text-white placeholder-blue-300/50" placeholder="Jakou službu si přejete a kdy?"></textarea>
-
+                        <div class="form-group">
+                            <select class="form-control">
+                                <option value="" disabled selected>O jakou službu máte zájem?</option>
+                                <option>Dámský střih</option>
+                                <option>Barvení / Melír</option>
+                                <option>Pánský střih</option>
+                                <option>Jiné / Konzultace</option>
+                            </select>
                         </div>
-
-                        <button class="w-full bg-blue-200 text-blue-900 font-bold uppercase tracking-[0.2em] py-4 rounded-xl hover:bg-white transition-all shadow-lg transform hover:-translate-y-1">
-
-                            Odeslat zprávu
-
-                        </button>
-
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Vaše zpráva nebo preferovaný termín..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Odeslat zprávu</button>
                     </form>
-
                 </div>
 
             </div>
-
-
-
-            <div class="mt-16 w-full h-[400px] rounded-[2rem] overflow-hidden shadow-lg border-4 border-white fade-in-section">
-
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2557.665786737224!2d14.1205369!3d50.1294639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470bc8c600000001%3A0x400af0f661556e0!2sHolandsk%C3%A1%202476%2C%20272%2001%20Kladno!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-
-            </div>
-
         </div>
-
     </section>
 
-
-
-    <footer class="bg-blue-900 text-white py-12 border-t border-blue-800">
-
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-
-            <div class="text-center md:text-left">
-
-                <div class="font-heading text-2xl font-black uppercase mb-2 flex items-center justify-center md:justify-start">
-
-                    <span class="text-blue-300 mr-2"><i class="fa-solid fa-scissors"></i></span> Kadeřnictví Blue
-
-                </div>
-
-                <p class="text-sm text-blue-200/60">Holandská 2476, Kladno - Kročehlavy</p>
-
-            </div>
-
-           
-
-            <div class="flex space-x-6 text-2xl text-blue-300">
-
-                <a href="#" class="hover:text-white transition-colors transform hover:scale-110"><i class="fa-brands fa-facebook"></i></a>
-
-                <a href="#" class="hover:text-white transition-colors transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
-
-                <a href="#" class="hover:text-white transition-colors transform hover:scale-110"><i class="fa-brands fa-whatsapp"></i></a>
-
-            </div>
-
-
-
-            <div class="text-sm text-blue-200/40 font-medium text-center md:text-right">
-
-                © <span id="year"></span> Kadeřnictví Blue.<br>
-
-                <a href="https://webykejha.cz" target="_blank" class="hover:text-blue-200 transition-colors">Designed by Kejha.dev</a>
-
-            </div>
-
+    <footer>
+        <div class="container">
+            <p>© 2024 Kadeřnictví Blue | Vytvořeno s péčí.</p>
         </div>
-
     </footer>
 
-
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
     <script>
-
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-
-
-        const btn = document.getElementById('mobile-menu-btn');
-
-        const menu = document.getElementById('mobile-menu');
-
-        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
-
-
-
-        const observer = new IntersectionObserver((entries) => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add('is-visible');
-
-                }
-
-            });
-
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in-section').forEach((section) => observer.observe(section));
-
-
-
-        window.addEventListener('scroll', () => {
-
-            const nav = document.getElementById('navbar');
-
-            window.scrollY > 50 ? nav.classList.add('py-2') : nav.classList.remove('py-2');
-
+        // Inicializace AOS animací
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
         });
 
+        // Mobilní menu
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Slider pro recenze
+        var reviewsSwiper = new Swiper(".reviewsSwiper", {
+            slidesPerView: 1, 
+            spaceBetween: 30,
+            loop: true,       
+            centeredSlides: true,
+            autoplay: {
+                delay: 4000,  
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
     </script>
-
 </body>
-
 </html>
