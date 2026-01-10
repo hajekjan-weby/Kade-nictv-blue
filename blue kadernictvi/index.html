@@ -997,6 +997,35 @@
                 justify-content: center;
             }
         }
+
+        /* --- Styl pro odkaz na Reservio v recenzích --- */
+        .reservio-source {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .reservio-source i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        .reservio-source a {
+            color: var(--primary);
+            font-weight: 800;
+            text-decoration: none;
+            border-bottom: 2px solid rgba(0, 194, 255, 0.3);
+            transition: 0.3s;
+            padding-bottom: 2px;
+        }
+
+        .reservio-source a:hover {
+            color: #fff;
+            border-bottom-color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -1215,6 +1244,12 @@
             <div class="section-title">
                 <h2>Co říkají klienti</h2>
                 <div class="line"></div>
+                
+                <p class="reservio-source" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-check-circle"></i> 
+                    Ověřené hodnocení z rezervačního systému 
+                    <a href="https://www.reservio.cz/b/kadernictvi-blue/booking" target="_blank">Reservio</a>
+                </p>
             </div>
             
            <div class="swiper reviewsSwiper">
